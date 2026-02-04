@@ -1,0 +1,34 @@
+/* 1. Importiamo il font Montserrat */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* 2. Importiamo Tailwind */
+@import "tailwindcss";
+
+/* 3. Configuriamo il tuo Brand */
+@theme {
+  /* I tuoi colori personalizzati */
+  --color-brand-blue: #3884C5;   /* Colore Primario */
+  --color-brand-dark: #0C283B;   /* Sfondo scuro / Testo scuro */
+  --color-brand-light: #F9F9F9;  /* Sfondo chiaro / Testo chiaro */
+
+  /* Il tuo font */
+  --font-montserrat: 'Montserrat', sans-serif;
+}
+
+/* 4. Stili Base */
+body {
+  background-color: var(--color-brand-dark);
+  color: var(--color-brand-light);
+  font-family: var(--font-montserrat);
+  
+  /* Nascondi scrollbar */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+body::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
