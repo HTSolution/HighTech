@@ -119,25 +119,9 @@ export const PROJECTS = [
     client: "Finance Corp",
     role: "Cybersecurity",
     desc: "Implementazione Zero Trust Architecture per un gruppo bancario internazionale.",
-    tags: ["Security", "Compliance"],
-    imageText: "Risk: 0%"
-  },
-  {
-    id: 2,
-    client: "Manifattura 4.0",
-    role: "IoT Cloud",
-    desc: "Sistema di monitoraggio predittivo per macchinari industriali su Azure.",
-    tags: ["Azure", "IoT Hub"],
-    imageText: "Eff: +40%"
-  },
-  {
-    id: 3,
-    client: "Retail Global",
-    role: "Omnichannel",
-    desc: "Unificazione magazzino fisico ed e-commerce in un unico ERP centralizzato.",
-    tags: ["SAP", "Integration"],
-    imageText: "Sync: 100%"
-  },
+    tags: ["Tool", "Framework"],
+    imageText: "Immagine"
+  }
 ];
 
 export const HISTORY = [

@@ -1,25 +1,25 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google"; // O il font che c'è di default
+import { Montserrat } from "next/font/google"; // Usiamo Montserrat come nel tuo CSS
 import "./globals.css";
+import OverlayNav from "@/components/OverlayNav";
 
-// 1. IMPORTA LA NAVBAR
-import Navbar from "@/components/Navbar"; 
-import OverlayNav from "@/components/OverlayNav"; 
-
-const inter = Inter({ subsets: ["latin"] });
+const montserrat = Montserrat({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Il Mio Sito Animato",
+  title: "HT Solution",
   description: "Creato con Next.js e Tailwind v4",
+  icons: {
+    icon: "/icon.svg",
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="it">
-      <body className={inter.className}>
-        <Navbar /> {/* Navbar fissa sopra a tutto */}
-        {/*<OverlayNav /> QUESTA è TIPO BURGER MENU*/}
-        {children} {/* Qui dentro c'è il HorizontalWrapper che scorre */}
+      <body className={montserrat.className}>
+        <OverlayNav />
+        {children}
       </body>
     </html>
   );
