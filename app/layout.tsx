@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google"; // Usiamo Montserrat come nel tuo CSS
+import { Montserrat } from "next/font/google";
 import "./globals.css";
-import OverlayNav from "@/components/OverlayNav";
+import OverlayNav from "@/components/layout/OverlayNav";
+
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
