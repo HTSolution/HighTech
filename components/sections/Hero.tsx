@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform, Variants} from 'framer-motion';
 import Image from 'next/image';
 import { useEffect } from 'react';
 import { HERO_CONTENT } from '@/constants';
@@ -9,16 +9,13 @@ export default function Hero() {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  // Configurazione spring per un movimento fluido "tipo Apple"
   const springConfig = { damping: 30, stiffness: 100 };
   const smoothX = useSpring(mouseX, springConfig);
   const smoothY = useSpring(mouseY, springConfig);
 
-  // Trasformazioni per l'effetto parallasse
   const rotateX = useTransform(smoothY, [0, 1000], [5, -5]);
   const rotateY = useTransform(smoothX, [0, 1920], [-5, 5]);
 
-  // Movimento leggero per l'immagine centrale
   const faceTranslateX = useTransform(smoothX, [0, 1920], [-15, 15]);
   const faceTranslateY = useTransform(smoothY, [0, 1000], [-15, 15]);
 
@@ -31,23 +28,25 @@ export default function Hero() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [mouseX, mouseY]);
 
-  // Varianti per l'animazione a cascata del testo
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.15, delayChildren: 0.3 }
-    }
-  };
+    const containerVariants: Variants = {
+      hidden: { opacity: 0 },
+      visible: {
+        opacity: 1,
+        transition: { staggerChildren: 0.15, delayChildren: 0.3 }
+      }
+    };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 1, ease: [0.16, 1, 0.3, 1] }
-    }
-  };
+    const itemVariants: Variants = {
+      hidden: { opacity: 0, y: 30 },
+      visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+          duration: 1,
+          ease: [0.16, 1, 0.3, 1] as any
+        }
+      }
+    };
 
   return (
     <section
