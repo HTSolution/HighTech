@@ -6,7 +6,6 @@ import { useEffect } from 'react';
 import { HERO_CONTENT } from '@/constants';
 
 export default function Hero() {
-  // Teniamo il tracciamento del mouse SOLO per il bagliore blu di sfondo
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -46,9 +45,10 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative w-full min-h-screen flex items-center justify-center pt-32 pb-12 px-6 md:px-10 bg-white overflow-hidden"
+      // Su mobile riduciamo il padding top (pt-24 invece di pt-32)
+      className="relative w-full min-h-screen flex items-center justify-center pt-24 md:pt-32 pb-12 px-4 md:px-10 bg-white overflow-hidden"
     >
-      {/* Bagliore blu di sfondo che segue il mouse */}
+      {/* Bagliore blu */}
       <motion.div
         className="pointer-events-none absolute z-0 w-[800px] h-[800px] rounded-full opacity-[0.12]"
         style={{
@@ -61,7 +61,6 @@ export default function Hero() {
         }}
       />
 
-      {/* Griglia di sfondo */}
       <div className="absolute inset-0 z-0 opacity-[0.4]"
         style={{
           backgroundImage: `linear-gradient(to right, #f1f5f9 1px, transparent 1px), linear-gradient(to bottom, #f1f5f9 1px, transparent 1px)`,
@@ -71,46 +70,48 @@ export default function Hero() {
         }}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col-reverse md:flex-row items-center justify-between">
+      {/* Riduciamo il gap su mobile per evitare spazi vuoti eccessivi */}
+      <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col-reverse md:flex-row items-center justify-between gap-10 md:gap-0">
 
-        {/* PARTE SINISTRA: Testi */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="flex-1 flex flex-col items-center md:items-start text-center md:text-left mt-12 md:mt-0"
+          className="flex-1 flex flex-col items-center md:items-start text-center md:text-left mt-8 md:mt-0 w-full"
         >
+          {/* TITOLO: Scalato da text-5xl (Mobile) a text-[10rem] (Desktop) */}
           <motion.h1
             variants={itemVariants}
-            className="text-7xl sm:text-8xl lg:text-[10rem] font-semibold tracking-tighter leading-[0.82] text-brand-dark"
+            className="text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-semibold tracking-tighter leading-[1] md:leading-[0.82] text-brand-dark"
           >
             {HERO_CONTENT.title.first}<span className="text-brand-blue">.</span><br/>
             {HERO_CONTENT.title.second}<span className="text-brand-blue">.</span>
           </motion.h1>
 
+          {/* CLAIM: Più piccolo su mobile (text-sm) per non andare a capo male */}
           <motion.p
             variants={itemVariants}
-            className="mt-8 text-lg md:text-xl text-brand-blue font-bold uppercase tracking-[0.4em]"
+            className="mt-6 md:mt-8 text-sm md:text-xl text-brand-blue font-bold uppercase tracking-[0.2em] md:tracking-[0.4em]"
           >
             {HERO_CONTENT.claim}
           </motion.p>
 
           <motion.p
             variants={itemVariants}
-            className="mt-6 text-base md:text-lg text-brand-gray max-w-md font-light leading-relaxed italic"
+            className="mt-4 md:mt-6 text-sm md:text-lg text-brand-gray max-w-md font-light leading-relaxed italic px-4 md:px-0"
           >
             {HERO_CONTENT.description}
           </motion.p>
 
           <motion.div
             variants={itemVariants}
-            className="mt-10 flex flex-wrap gap-3 justify-center md:justify-start"
+            className="mt-8 flex flex-wrap gap-2 md:gap-3 justify-center md:justify-start"
           >
             {HERO_CONTENT.pills.map((pill, index) => (
               <motion.span
                 key={index}
                 whileHover={{ y: -2, borderColor: '#0055ff' }}
-                className="px-5 py-2 rounded-full border border-gray-100 bg-white shadow-sm text-brand-blue text-[10px] font-bold uppercase tracking-widest transition-colors"
+                className="px-4 md:px-5 py-2 rounded-full border border-gray-100 bg-white shadow-sm text-brand-blue text-[9px] md:text-[10px] font-bold uppercase tracking-widest transition-colors"
               >
                 {pill}
               </motion.span>
@@ -118,13 +119,9 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* PARTE DESTRA: Elementi Visivi (ORA COMPLETAMENTE IMMOBILI RISPETTO AL MOUSE) */}
-        <div className="flex-1 relative flex justify-center items-center">
-
-          {/* Semplice div senza animazioni parallax */}
+        <div className="flex-1 relative flex justify-center items-center w-full">
           <div className="relative w-full flex justify-center items-center">
 
-            {/* Widget: Uptime (Oscilla leggermente su e giù da solo, senza mouse) */}
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
@@ -137,7 +134,6 @@ export default function Hero() {
               <p className="text-2xl font-black text-brand-dark tracking-tighter">{HERO_CONTENT.widgets.uptime}</p>
             </motion.div>
 
-            {/* Widget: Status / Graph (Oscilla leggermente su e giù da solo) */}
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
@@ -159,8 +155,7 @@ export default function Hero() {
                <p className="text-xs font-bold text-brand-blue tracking-tight">{HERO_CONTENT.widgets.status}</p>
             </motion.div>
 
-            {/* IMMAGINE STATICA E FERMA */}
-            <div className="relative w-full aspect-square max-w-[200px] sm:max-w-[300px] md:max-w-[400px] lg:max-w-[500px] z-10">
+            <div className="relative w-full aspect-square max-w-[180px] sm:max-w-[300px] md:max-w-[400px] lg:max-w-[500px] z-10">
               <Image
                 src="/face.png"
                 alt="HT Solution Visual"
