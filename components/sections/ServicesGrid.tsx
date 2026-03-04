@@ -52,15 +52,21 @@ export default function ServicesGrid() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 md:grid-rows-6 lg:grid-rows-2 gap-4 md:gap-6 w-full auto-rows-fr">
-          {SERVICES.slice(0, 5).map((s, i) => {
+        {/* LAYOUT BENTO PER 6 ELEMENTI
+          Desktop (lg): Griglia 4 colonne x 2 righe
+          Tablet (md): Griglia 2 colonne x 3 righe
+        */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 md:grid-rows-3 lg:grid-rows-2 gap-4 md:gap-6 w-full auto-rows-fr">
+          {SERVICES.slice(0, 6).map((s, i) => {
             let gridClass = "";
-            if (i === 0 || i === 1) {
-              gridClass = i === 0
-                ? "md:col-span-1 md:row-span-3 lg:col-span-2 lg:row-span-2"
-                : "md:col-span-1 md:row-span-3 lg:col-span-1 lg:row-span-1";
+
+            // La prima card e l'ultima card sono più larghe (occupano 2 colonne)
+            if (i === 0) {
+              gridClass = "md:col-span-2 lg:col-span-2 lg:row-span-1";
+            } else if (i === 5) {
+              gridClass = "md:col-span-2 lg:col-span-2 lg:row-span-1";
             } else {
-              gridClass = "md:col-span-1 md:row-span-2 lg:col-span-1 lg:row-span-1";
+              gridClass = "md:col-span-1 lg:col-span-1 lg:row-span-1";
             }
 
             return (

@@ -3,18 +3,21 @@ export const HERO_CONTENT = {
     first: "High Tech",
     second: "Solution"
   },
-  claim: "Innovazione IT dal 2001",
-  description: "Progettiamo soluzioni tecnologiche verticali per il mondo B2B, integrando software, hardware e visione strategica.",
+  claim: "Specialisti in Infrastrutture Critiche",
+
+  description: "Progettiamo e gestiamo infrastrutture IT sicure, sviluppiamo software su misura e realizziamo soluzioni avanzate per Pubblica Amministrazione, PMI e settore Navale.",
+
   pills: [
-    "+20 anni di esperienza",
-    "Soluzioni IT verticali",
-    "Innovazione applicata ai processi reali"
+    "Compliance Direttiva NIS",
+    "Esperienza PA e Navale",
+    "Infrastruttura, Software & IA"
   ],
+
   widgets: {
-    uptime: "99.98%",
-    latency: "14ms",
-    load: "65%",
-    status: "Active",
-    node: "Node_01"
+    uptime: "99.99%",
+    latency: "<12ms",
+    load: "42%",
+    status: "Secure",
+    node: "Core_HA_01"
   }
 };

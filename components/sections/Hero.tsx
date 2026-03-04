@@ -1,23 +1,18 @@
 'use client';
 
-import { motion, useMotionValue, useSpring, useTransform, Variants} from 'framer-motion';
+import { motion, useMotionValue, useSpring, Variants} from 'framer-motion';
 import Image from 'next/image';
 import { useEffect } from 'react';
 import { HERO_CONTENT } from '@/constants';
 
 export default function Hero() {
+  // Teniamo il tracciamento del mouse SOLO per il bagliore blu di sfondo
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
   const springConfig = { damping: 30, stiffness: 100 };
   const smoothX = useSpring(mouseX, springConfig);
   const smoothY = useSpring(mouseY, springConfig);
-
-  const rotateX = useTransform(smoothY, [0, 1000], [5, -5]);
-  const rotateY = useTransform(smoothX, [0, 1920], [-5, 5]);
-
-  const faceTranslateX = useTransform(smoothX, [0, 1920], [-15, 15]);
-  const faceTranslateY = useTransform(smoothY, [0, 1000], [-15, 15]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -28,31 +23,32 @@ export default function Hero() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [mouseX, mouseY]);
 
-    const containerVariants: Variants = {
-      hidden: { opacity: 0 },
-      visible: {
-        opacity: 1,
-        transition: { staggerChildren: 0.15, delayChildren: 0.3 }
-      }
-    };
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15, delayChildren: 0.3 }
+    }
+  };
 
-    const itemVariants: Variants = {
-      hidden: { opacity: 0, y: 30 },
-      visible: {
-        opacity: 1,
-        y: 0,
-        transition: {
-          duration: 1,
-          ease: [0.16, 1, 0.3, 1] as any
-        }
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 1,
+        ease: [0.16, 1, 0.3, 1] as any
       }
-    };
+    }
+  };
 
   return (
     <section
       id="home"
       className="relative w-full min-h-screen flex items-center justify-center pt-32 pb-12 px-6 md:px-10 bg-white overflow-hidden"
     >
+      {/* Bagliore blu di sfondo che segue il mouse */}
       <motion.div
         className="pointer-events-none absolute z-0 w-[800px] h-[800px] rounded-full opacity-[0.12]"
         style={{
@@ -65,6 +61,7 @@ export default function Hero() {
         }}
       />
 
+      {/* Griglia di sfondo */}
       <div className="absolute inset-0 z-0 opacity-[0.4]"
         style={{
           backgroundImage: `linear-gradient(to right, #f1f5f9 1px, transparent 1px), linear-gradient(to bottom, #f1f5f9 1px, transparent 1px)`,
@@ -76,6 +73,7 @@ export default function Hero() {
 
       <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col-reverse md:flex-row items-center justify-between">
 
+        {/* PARTE SINISTRA: Testi */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -120,15 +118,13 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* Right Side: Visual Elements */}
+        {/* PARTE DESTRA: Elementi Visivi (ORA COMPLETAMENTE IMMOBILI RISPETTO AL MOUSE) */}
         <div className="flex-1 relative flex justify-center items-center">
 
-          {/* Parallax Widgets */}
-          <motion.div
-            style={{ x: rotateY, y: rotateX, rotateY, rotateX }}
-            className="relative w-full flex justify-center items-center"
-          >
-            {/* Widget: Uptime */}
+          {/* Semplice div senza animazioni parallax */}
+          <div className="relative w-full flex justify-center items-center">
+
+            {/* Widget: Uptime (Oscilla leggermente su e giù da solo, senza mouse) */}
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
@@ -141,7 +137,7 @@ export default function Hero() {
               <p className="text-2xl font-black text-brand-dark tracking-tighter">{HERO_CONTENT.widgets.uptime}</p>
             </motion.div>
 
-            {/* Widget: Status / Graph */}
+            {/* Widget: Status / Graph (Oscilla leggermente su e giù da solo) */}
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
@@ -160,14 +156,11 @@ export default function Hero() {
                   ))}
                </div>
                <p className="text-[9px] font-bold uppercase tracking-[0.2em] opacity-50 mb-1">Data Flow</p>
-               <p className="text-xs font-bold text-brand-blue tracking-tight">{HERO_CONTENT.widgets.status}...</p>
+               <p className="text-xs font-bold text-brand-blue tracking-tight">{HERO_CONTENT.widgets.status}</p>
             </motion.div>
 
-            {/* Main Image with mouse translation */}
-            <motion.div
-              style={{ x: faceTranslateX, y: faceTranslateY }}
-              className="relative w-full aspect-square max-w-[200px] sm:max-w-[300px] md:max-w-[400px] lg:max-w-[500px] z-10"
-            >
+            {/* IMMAGINE STATICA E FERMA */}
+            <div className="relative w-full aspect-square max-w-[200px] sm:max-w-[300px] md:max-w-[400px] lg:max-w-[500px] z-10">
               <Image
                 src="/face.png"
                 alt="HT Solution Visual"
@@ -175,8 +168,9 @@ export default function Hero() {
                 priority
                 className="object-contain drop-shadow-[0_35px_35px_rgba(0,0,0,0.1)]"
               />
-            </motion.div>
-          </motion.div>
+            </div>
+
+          </div>
         </div>
       </div>
     </section>
