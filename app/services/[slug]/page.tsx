@@ -1,19 +1,32 @@
 'use client';
 
 import { useParams, useRouter } from 'next/navigation';
-import { SERVICES } from '@/constants';
 import { useEffect } from 'react';
 import Link from 'next/link';
+import { useLanguage } from '@/context/LanguageContext';
+import { SERVICES_DATA } from '@/constants/home/services';
 
 export default function ServicePage() {
   const { slug } = useParams();
   const router = useRouter();
+  const { language, t } = useLanguage();
 
-  const currentIndex = SERVICES.findIndex(s => s.slug === slug);
-  const service = SERVICES[currentIndex];
+  // Logica migliorata: cerchiamo lo slug in entrambi gli array per evitare crash al cambio lingua
+  const findServiceIndex = () => {
+    const itIndex = SERVICES_DATA.it.findIndex(s => s.slug === slug);
+    if (itIndex !== -1) return itIndex;
+    const enIndex = SERVICES_DATA.en.findIndex(s => s.slug === slug);
+    if (enIndex !== -1) return enIndex;
+    return -1;
+  };
 
-  const nextService = SERVICES[(currentIndex + 1) % SERVICES.length];
-  const prevService = SERVICES[(currentIndex - 1 + SERVICES.length) % SERVICES.length];
+  const currentIndex = findServiceIndex();
+  const servicesList = SERVICES_DATA[language];
+  const service = servicesList[currentIndex];
+
+  // Navigazione circolare
+  const nextService = servicesList[(currentIndex + 1) % servicesList.length];
+  const prevService = servicesList[(currentIndex - 1 + servicesList.length) % servicesList.length];
 
   useEffect(() => {
     if (slug) window.scrollTo(0, 0);
@@ -21,7 +34,9 @@ export default function ServicePage() {
 
   if (!service) return (
     <div className="h-screen flex items-center justify-center bg-white">
-      <Link href="/" className="text-brand-blue font-bold uppercase tracking-widest">Torna alla Home</Link>
+      <Link href="/" className="text-brand-blue font-bold uppercase tracking-widest">
+        {t("Torna alla Home", "Back to Home")}
+      </Link>
     </div>
   );
 
@@ -29,12 +44,11 @@ export default function ServicePage() {
     <div className="bg-white min-h-screen text-brand-dark">
       <header className="pt-40 pb-16 px-6 md:px-10 border-b border-gray-50">
         <div className="max-w-7xl mx-auto">
-          {/* Breadcrumbs */}
           <nav className="mb-12 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.3em]">
             <Link href="/" className="text-brand-gray/40 hover:text-brand-blue transition-colors">Home</Link>
             <span className="text-brand-gray/20">/</span>
-            <button onClick={() => router.push('/#services')} className="text-brand-gray/40 hover:text-brand-blue transition-colors cursor-pointer">
-              Servizi
+            <button onClick={() => router.push('/servizi')} className="text-brand-gray/40 hover:text-brand-blue transition-colors cursor-pointer uppercase">
+              {t("Servizi", "Services")}
             </button>
             <span className="text-brand-gray/20">/</span>
             <span className="text-brand-blue">{service.title}</span>
@@ -59,23 +73,25 @@ export default function ServicePage() {
 
           {/* Sidebar Tecnica */}
           <aside className="lg:col-span-4 space-y-16">
-           <div className="p-8 bg-brand-light rounded-[2.5rem] border border-gray-100">
-               <h3 className="text-[10px] font-black uppercase tracking-[0.5em] text-brand-blue mb-8 text-center">
-                 Key Metrics
-               </h3>
-               <div className="space-y-8">
-                 {service.metrics?.map((m, i) => (
-                   <div key={i} className="text-center">
-                     <p className="text-3xl font-bold text-brand-dark">{m.value}</p>
-                     <p className="text-[10px] uppercase tracking-widest text-brand-gray">{m.label}</p>
-                   </div>
-                 ))}
-               </div>
-             </div>
+            <div className="p-8 bg-brand-light rounded-[2.5rem] border border-gray-100">
+              <h3 className="text-[10px] font-black uppercase tracking-[0.5em] text-brand-blue mb-8 text-center">
+                Key Metrics
+              </h3>
+              <div className="space-y-8">
+                {service.metrics?.map((m, i) => (
+                  <div key={i} className="text-center">
+                    <p className="text-3xl font-bold text-brand-dark">{m.value}</p>
+                    <p className="text-[10px] uppercase tracking-widest text-brand-gray">{m.label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
 
             <div className="space-y-12">
               <div>
-                <h3 className="text-[10px] font-black uppercase tracking-[0.5em] text-brand-blue mb-8 text-center lg:text-left">Specifiche</h3>
+                <h3 className="text-[10px] font-black uppercase tracking-[0.5em] text-brand-blue mb-8 text-center lg:text-left">
+                  {t("Specifiche", "Specifications")}
+                </h3>
                 <div className="space-y-4">
                   {service.details?.map((d, i) => (
                     <div key={i} className="flex flex-col py-4 border-b border-gray-50">
@@ -87,7 +103,9 @@ export default function ServicePage() {
               </div>
 
               <div>
-                <h3 className="text-[10px] font-black uppercase tracking-[0.5em] text-brand-blue mb-8 text-center lg:text-left">Tecnologie</h3>
+                <h3 className="text-[10px] font-black uppercase tracking-[0.5em] text-brand-blue mb-8 text-center lg:text-left">
+                  {t("Tecnologie", "Technologies")}
+                </h3>
                 <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
                   {service.stack?.map((s, i) => (
                     <span key={i} className="px-4 py-2 bg-gray-50 text-brand-dark text-[10px] font-bold rounded-full border border-gray-100 uppercase">
@@ -99,17 +117,21 @@ export default function ServicePage() {
             </div>
           </aside>
 
-          {/* Contenuto Dinamico */}
+          {/* Contenuto Principale */}
           <div className="lg:col-span-8">
             <section className="mb-24">
-              <h3 className="text-[10px] font-black uppercase tracking-[0.5em] text-brand-blue mb-10">Visione Strategica</h3>
+              <h3 className="text-[10px] font-black uppercase tracking-[0.5em] text-brand-blue mb-10">
+                {t("Visione Strategica", "Strategic Vision")}
+              </h3>
               <div className="text-lg md:text-2xl text-brand-dark font-light leading-relaxed">
                 {service.fullContent}
               </div>
             </section>
 
             <section className="mb-24">
-              <h3 className="text-[10px] font-black uppercase tracking-[0.5em] text-brand-blue mb-12">Il Nostro Metodo</h3>
+              <h3 className="text-[10px] font-black uppercase tracking-[0.5em] text-brand-blue mb-12">
+                {t("Il Nostro Metodo", "Our Method")}
+              </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {service.process?.map((p, i) => (
                   <div key={i} className="p-10 rounded-[2.5rem] bg-gray-50/50 border border-gray-100 group hover:border-brand-blue/30 transition-all duration-500">
@@ -121,40 +143,46 @@ export default function ServicePage() {
               </div>
             </section>
 
-            {/* --- NUOVA SEZIONE CTA HIGH-CONVERSION --- */}
+            {/* CTA Sezione - Link Aggiornato a /contatti */}
             <section className="p-12 md:p-16 bg-brand-dark rounded-[3.5rem] text-brand-light relative overflow-hidden">
-               <div className="relative z-10">
-                  <h3 className="text-3xl md:text-5xl font-light tracking-tighter mb-6 leading-tight">
-                    Pronto a scalare la tua <br/>
-                    <span className="font-bold italic italic">Infrastruttura Digitale?</span>
-                  </h3>
-                  <p className="text-brand-gray text-lg mb-10 max-w-xl font-light">
-                    Prenota un audit tecnico preliminare di 30 minuti con i nostri esperti. Analizzeremo i tuoi colli di bottiglia senza impegno.
-                  </p>
-                  <Link
-                    href="/#contact"
-                    className="inline-block px-10 py-5 bg-brand-blue text-white rounded-full font-bold uppercase text-xs tracking-[0.3em] hover:bg-brand-light hover:text-brand-blue transition-all shadow-xl shadow-brand-blue/20"
-                  >
-                    Richiedi Audit Gratuito
-                  </Link>
-               </div>
-               {/* Elemento decorativo */}
-               <div className="absolute top-[-20%] right-[-10%] w-64 h-64 bg-brand-blue/20 blur-[100px] rounded-full" />
+              <div className="relative z-10">
+                <h3 className="text-3xl md:text-5xl font-light tracking-tighter mb-6 leading-tight">
+                  {t("Pronto a scalare la tua", "Ready to scale your")} <br/>
+                  <span className="font-bold italic italic">{t("Infrastruttura Digitale?", "Digital Infrastructure?")}</span>
+                </h3>
+                <p className="text-brand-gray text-lg mb-10 max-w-xl font-light">
+                  {t(
+                    "Prenota un audit tecnico preliminare di 30 minuti con i nostri esperti. Analizzeremo i tuoi colli di bottiglia senza impegno.",
+                    "Book a 30-minute preliminary technical audit with our experts. We will analyze your bottlenecks with no obligation."
+                  )}
+                </p>
+                <Link
+                  href="/contatti"
+                  className="inline-block px-10 py-5 bg-brand-blue text-white rounded-full font-bold uppercase text-xs tracking-[0.3em] hover:bg-brand-light hover:text-brand-blue transition-all shadow-xl shadow-brand-blue/20"
+                >
+                  {t("Richiedi Audit Gratuito", "Request Free Audit")}
+                </Link>
+              </div>
+              <div className="absolute top-[-20%] right-[-10%] w-64 h-64 bg-brand-blue/20 blur-[100px] rounded-full" />
             </section>
           </div>
         </div>
 
         {/* Navigazione Circolare */}
         <section className="mt-24 py-20 border-t border-gray-100 flex justify-between items-center">
-            <Link href={`/services/${prevService.slug}`} className="group flex flex-col items-start gap-2">
-              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-gray/40 group-hover:text-brand-blue transition-colors">← Precedente</span>
-              <span className="text-xl font-light text-brand-dark group-hover:font-medium transition-all">{prevService.title}</span>
-            </Link>
+          <Link href={`/services/${prevService.slug}`} className="group flex flex-col items-start gap-2">
+            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-gray/40 group-hover:text-brand-blue transition-colors">
+              ← {t("Precedente", "Previous")}
+            </span>
+            <span className="text-xl font-light text-brand-dark group-hover:font-medium transition-all">{prevService.title}</span>
+          </Link>
 
-            <Link href={`/services/${nextService.slug}`} className="group flex flex-col items-end gap-2 text-right">
-              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-gray/40 group-hover:text-brand-blue transition-colors">Successivo →</span>
-              <span className="text-xl font-light text-brand-dark group-hover:font-medium transition-all">{nextService.title}</span>
-            </Link>
+          <Link href={`/services/${nextService.slug}`} className="group flex flex-col items-end gap-2 text-right">
+            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-gray/40 group-hover:text-brand-blue transition-colors">
+              {t("Successivo", "Next")} →
+            </span>
+            <span className="text-xl font-light text-brand-dark group-hover:font-medium transition-all">{nextService.title}</span>
+          </Link>
         </section>
       </main>
     </div>

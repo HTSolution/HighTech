@@ -1,4 +1,4 @@
-'use client';
+/*'use client';
 
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
@@ -106,4 +106,4 @@ const ProjectRow = ({ project, index }: { project: any, index: number }) => {
       </motion.div>
     </div>
   );
-};
+};*/

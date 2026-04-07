@@ -1,27 +1,27 @@
-import Hero from '@/components/sections/Hero';
-import Identity from '@/components/sections/Identity';
-import ServicesGrid from '@/components/sections/ServicesGrid';
-import Sectors from '@/components/sections/Sectors'; // NUOVO
-import NavalFocus from '@/components/sections/NavalFocus'; // NUOVO
-import History from '@/components/sections/History';
-import ContactFooter from '@/components/sections/ContactFooter';
+import Hero from '@/components/sections/home/Hero';
+import Sectors from '@/components/sections/home/Sectors';
+import ServicesGrid from '@/components/sections/home/ServicesGrid';
+import ReadyToScale from '@/components/sections/home/ReadyToScale';
+import BoutiqueTeaser from '@/components/sections/home/BoutiqueTeaser';
+import NavalTeaser from '@/components/sections/home/NavalTeaser';
+import ContactFooter from '@/components/layout/ContactFooter';
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-white overflow-x-hidden">
+      
       <Hero />
 
-      <Identity />
+      <BoutiqueTeaser />
 
       <Sectors />
-
+      
       <ServicesGrid />
+      
+      <NavalTeaser />
 
-      <NavalFocus />
+      <ReadyToScale />
 
-      <History />
-
-      <ContactFooter />
     </main>
   );
 }
