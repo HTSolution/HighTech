@@ -10,8 +10,6 @@ export default function ServicePage() {
   const { slug } = useParams();
   const router = useRouter();
   const { language, t } = useLanguage();
-
-  // Logica migliorata: cerchiamo lo slug in entrambi gli array per evitare crash al cambio lingua
   const findServiceIndex = () => {
     const itIndex = SERVICES_DATA.it.findIndex(s => s.slug === slug);
     if (itIndex !== -1) return itIndex;
@@ -143,12 +141,12 @@ export default function ServicePage() {
               </div>
             </section>
 
-            {/* CTA Sezione - Link Aggiornato a /contatti */}
+            {/* CTA Sezione */}
             <section className="p-12 md:p-16 bg-brand-dark rounded-[3.5rem] text-brand-light relative overflow-hidden">
               <div className="relative z-10">
                 <h3 className="text-3xl md:text-5xl font-light tracking-tighter mb-6 leading-tight">
                   {t("Pronto a scalare la tua", "Ready to scale your")} <br/>
-                  <span className="font-bold italic italic">{t("Infrastruttura Digitale?", "Digital Infrastructure?")}</span>
+                  <span className="font-bold italic">{t("Infrastruttura Digitale?", "Digital Infrastructure?")}</span>
                 </h3>
                 <p className="text-brand-gray text-lg mb-10 max-w-xl font-light">
                   {t(

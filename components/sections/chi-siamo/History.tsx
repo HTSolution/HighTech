@@ -1,30 +1,35 @@
-import { HISTORY, HISTORY_CONTENT } from '@/constants';
+'use client';
+
+import { useLanguage } from '@/context/LanguageContext';
+import { ABOUT_PAGE_DATA } from '@/constants/chi-siamo/about';
 
 export default function History() {
+  const { language } = useLanguage();
+  
+  // Prendiamo i dati della lingua attuale in modo diretto
+  const { history } = ABOUT_PAGE_DATA[language];
+
   return (
-    <section
-      id="about"
-      className="py-24 md:py-32 px-6 md:px-10 bg-white"
-    >
+    <section id="history" className="py-24 md:py-32 px-6 md:px-10 bg-white">
       <div className="max-w-7xl mx-auto">
         
         {/* Intestazione Sezione */}
         <div className="mb-20">
           <p className="text-brand-blue text-[10px] font-bold uppercase tracking-[0.5em] mb-4">
-            {HISTORY_CONTENT.tag}
+            {history.tag}
           </p>
           <h2 className="text-5xl md:text-6xl font-light tracking-tight text-brand-dark">
-            {HISTORY_CONTENT.title.light} <span className="font-semibold">{HISTORY_CONTENT.title.bold}</span>
+            {history.title.light} <span className="font-semibold">{history.title.bold}</span>
             <span className="text-brand-blue">.</span>
           </h2>
           <p className="text-brand-gray mt-4 font-light text-lg md:text-xl tracking-wide max-w-2xl leading-relaxed">
-            {HISTORY_CONTENT.description}
+            {history.description}
           </p>
         </div>
 
         {/* Griglia della Storia */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {HISTORY.map((h, i) => (
+          {history.timeline.map((h, i) => (
             <div
               key={i}
               className="relative p-6 rounded-3xl border border-transparent hover:border-gray-100 hover:bg-brand-light/50 transition-all duration-500 hover:-translate-y-1 group"
@@ -41,7 +46,7 @@ export default function History() {
                 {h.desc}
               </p>
 
-              {/* Linea blu decorativa superiore (CSS nativo) */}
+              {/* Linea blu decorativa superiore */}
               <div className="absolute top-0 left-6 w-8 h-[2px] bg-brand-blue scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
             </div>
           ))}

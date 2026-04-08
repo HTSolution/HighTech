@@ -12,7 +12,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative w-full min-h-screen flex items-center justify-center pt-24 md:pt-32 pb-12 px-4 md:px-10 bg-white overflow-hidden"
+      className="relative w-full h-screen flex items-center justify-center px-4 md:px-10 bg-white overflow-hidden"
     >
       {/* Bagliore blu FISSO */}
       <div
@@ -41,7 +41,7 @@ export default function Hero() {
         {/* --- COLONNA SINISTRA: Testi --- */}
         <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left mt-8 md:mt-0 w-full">
           
-          <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-semibold tracking-tighter leading-[1] md:leading-[0.82] text-brand-dark">
+          <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-semibold tracking-tighter leading-none md:leading-[0.82] text-brand-dark">
             {content.title.first}<span className="text-brand-blue">.</span><br/>
             {content.title.second}<span className="text-brand-blue">.</span>
           </h1>
@@ -84,7 +84,7 @@ export default function Hero() {
             </div>
 
             {/* Widget: Status */}
-            <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 z-20 bg-brand-dark/95 text-white p-5 rounded-[2rem] shadow-2xl w-52 hidden md:block border border-white/10 hover:-translate-y-2 transition-transform duration-500 cursor-default">
+            <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 z-20 bg-brand-dark/95 text-white p-5 rounded-4xl shadow-2xl w-52 hidden md:block border border-white/10 hover:-translate-y-2 transition-transform duration-500 cursor-default">
                <div className="flex justify-between items-end mb-3 h-10">
                   {[0.4, 0.7, 1, 0.6, 0.9, 0.5].map((h, i) => (
                     <div
@@ -104,6 +104,7 @@ export default function Hero() {
                 alt="HT Solution Visual"
                 fill
                 priority
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="object-contain drop-shadow-[0_35px_35px_rgba(0,0,0,0.1)]"
               />
             </div>
