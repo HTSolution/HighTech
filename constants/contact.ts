@@ -8,7 +8,7 @@ export const CONTACT_DATA = {
     description: "Che tu abbia bisogno di un audit infrastrutturale o di un preventivo per lo sviluppo software, il nostro team è pronto ad ascoltarti.",
     info: {
       phone: { label: "Direct Line", value: "+39 081 868 1442" },
-      email: { label: "Contact Center", value: "info@htsolution.it" },
+      email: { label: "Contact Center", value: "info@htsolution.it | info@hightechsas.it" },
       address: { 
         label: "Headquarters", 
         value: "C.so Garibaldi 177,", 
@@ -30,7 +30,7 @@ export const CONTACT_DATA = {
     description: "Whether you need an infrastructure audit or a quote for custom software development, our team is ready to listen.",
     info: {
       phone: { label: "Direct Line", value: "+39 081 868 1442" },
-      email: { label: "Contact Center", value: "info@htsolution.it" },
+      email: { label: "Contact Center", value: "info@htsolution.it | info@hightechsas.it" },
       address: { 
         label: "Headquarters", 
         value: "C.so Garibaldi 177,", 

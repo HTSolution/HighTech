@@ -1,8 +1,8 @@
 export const HERO_DATA = {
   it: {
     title: {
-      first: "High Tech",
-      second: "Solution"
+      first: "High",
+      second: "Tech"
     },
     claim: "Specialisti in Infrastrutture Critiche",
     description: "Progettiamo e gestiamo infrastrutture IT sicure, sviluppiamo software su misura e realizziamo soluzioni avanzate per Pubblica Amministrazione, PMI e settore Navale.",
@@ -25,8 +25,8 @@ export const HERO_DATA = {
   },
   en: {
     title: {
-      first: "High Tech",
-      second: "Solution"
+      first: "High",
+      second: "Tech"
     },
     claim: "Critical Infrastructure Specialists",
     description: "We design and manage secure IT infrastructures, develop custom software, and create advanced solutions for Public Administration, SMBs, and the Marine sector.",
