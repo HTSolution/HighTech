@@ -6,7 +6,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { CONTACT_DATA } from '@/constants/contact';
 
 export default function ContattiPage() {
-  const { language, t } = useLanguage(); // Aggiunto t per traduzioni veloci
+  const { language, t } = useLanguage();
   const content = CONTACT_DATA[language];
 
   return (
@@ -109,36 +109,47 @@ export default function ContattiPage() {
                   {content.cta.button}
                 </a>
 
-                {/* RIFERIMENTO A KOYNA AI */}
-                <div className="pt-8 border-t border-white/5 flex flex-col items-center">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-500 mb-4">
+                {/* RIFERIMENTI AI */}
+                <div className="pt-8 border-t border-white/5 flex flex-col gap-4">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-500 text-center">
                     {t("Oppure interagisci con", "Or interact with")}
                   </p>
-                  <button 
-  onClick={() => {
-    // Crea e scatena l'evento personalizzato
-    const event = new Event('openKoyna');
-    window.dispatchEvent(event);
-  }}
-  className="group flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 w-full"
->
-  <div className="w-10 h-10 bg-brand-blue/20 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-brand-blue/40 transition-colors">
-    <img src="/icon.svg" alt="Koyna" className="w-5 h-5 brightness-200" />
-  </div>
-  <div className="text-left">
-    <p className="text-xs font-bold uppercase tracking-widest text-white">
-      {t("Koyna AI", "Koyna AI")}
-    </p>
-    <p className="text-[10px] text-gray-400 font-light">
-      {t("Assistente virtuale attivo ora", "Virtual assistant online now")}
-    </p>
-  </div>
-  <div className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M9 18l6-6-6-6"/>
-    </svg>
-  </div>
-</button>
+                  
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {/* Chatbot Kira */}
+                    <button 
+                      onClick={() => {
+                        const event = new Event('openKira');
+                        window.dispatchEvent(event);
+                      }}
+                      className="group flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300"
+                    >
+                      <div className="w-10 h-10 bg-brand-blue/20 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-brand-blue/40 transition-colors">
+                        <img src="/icon.svg" alt="Kira" className="w-5 h-5 brightness-200" />
+                      </div>
+                      <div className="text-left">
+                        <p className="text-xs font-bold uppercase tracking-widest text-white">Kira Chat</p>
+                        <p className="text-[9px] text-gray-400 font-light">{t("Messaggi istantanei", "Instant messages")}</p>
+                      </div>
+                    </button>
+
+                    {/* Chiamata Kira Voice */}
+                    <a 
+                      href="tel:0818681442"
+                      className="group flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300"
+                    >
+                      <div className="w-10 h-10 bg-emerald-500/20 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-emerald-500/40 transition-colors">
+                        <svg width="20" height="20" fill="none" stroke="#34d399" strokeWidth="2" viewBox="0 0 24 24">
+                          <path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/>
+                          <path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8"/>
+                        </svg>
+                      </div>
+                      <div className="text-left">
+                        <p className="text-xs font-bold uppercase tracking-widest text-white">Kira Voice</p>
+                        <p className="text-[9px] text-gray-400 font-light">{t("Avvia una chiamata", "Start a call")}</p>
+                      </div>
+                    </a>
+                  </div>
                 </div>
               </div>
             </motion.div>

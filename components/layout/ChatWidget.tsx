@@ -4,13 +4,13 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
 
-export default function KoynaChat() {
+export default function KiraChat() {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState('');
   const { t } = useLanguage();
   
   const [chatLog, setChatLog] = useState([
-    { role: 'assistant', content: 'Ciao! Sono Koyna, l\'assistente AI di HighTech. Come posso aiutarti oggi?' }
+    { role: 'assistant', content: 'Ciao! Sono Kira, l\'assistente AI di HighTech. Come posso aiutarti oggi?' }
   ]);
 
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -26,8 +26,8 @@ export default function KoynaChat() {
 
   useEffect(() => {
     const handleOpenChat = () => setIsOpen(true);
-    window.addEventListener('openKoyna', handleOpenChat);
-    return () => window.removeEventListener('openKoyna', handleOpenChat);
+    window.addEventListener('openKira', handleOpenChat);
+    return () => window.removeEventListener('openKira', handleOpenChat);
   }, []);
 
   useEffect(() => {
@@ -61,7 +61,7 @@ export default function KoynaChat() {
                 <Image src="/icon.svg" alt="HT Logo" width={20} height={20} className="brightness-200" priority />
               </div>
               <div>
-                <h3 className="font-bold text-sm tracking-widest uppercase">Chiedi a Koyna</h3>
+                <h3 className="font-bold text-sm tracking-widest uppercase">Chiedi a Kira</h3>
                 <div className="flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></span>
                   <span className="text-[10px] text-white/50 uppercase tracking-tighter">AI Assistant Online</span>
@@ -106,7 +106,7 @@ export default function KoynaChat() {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && setMessage('')}
-                placeholder={t("Scrivi a Koyna...", "Ask Koyna...")}
+                placeholder={t("Scrivi a Kira...", "Ask Kira...")}
                 className="flex-1 bg-transparent border-none py-2 text-sm outline-none text-brand-dark placeholder:text-brand-gray/50"
               />
               <button 
@@ -129,7 +129,7 @@ export default function KoynaChat() {
       {/* --- BOTTONE FLOTTANTE --- */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        aria-label="Toggle Koyna Chat"
+        aria-label="Toggle Kira Chat"
         className={`relative group w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center transition-all duration-500 shadow-2xl ${
           isOpen ? 'bg-brand-dark rotate-90 scale-90' : 'bg-brand-blue hover:bg-brand-dark hover:-translate-y-1'
         }`}
@@ -145,7 +145,7 @@ export default function KoynaChat() {
           {isOpen ? (
              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M19 9l-7 7-7-7"/></svg>
           ) : (
-             <Image src="/icon.svg" alt="Koyna" width={26} height={26} className="brightness-200" />
+             <Image src="/icon.svg" alt="Kira" width={26} height={26} className="brightness-200" />
           )}
         </div>
       </button>
