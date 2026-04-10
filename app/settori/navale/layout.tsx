@@ -14,6 +14,5 @@ export const metadata: Metadata = {
   },
 };
 export default function NavaleLayout({ children }: { children: React.ReactNode }) {
-  // Il layout si limita a renderizzare la pagina, ma inietta i metadati nel server!
   return <>{children}</>;
 }

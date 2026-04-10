@@ -7,7 +7,7 @@ type Language = 'it' | 'en';
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
-  t: (it: string, en: string) => string; // Funzione helper veloce
+  t: (it: string, en: string) => string;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);

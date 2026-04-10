@@ -26,32 +26,36 @@ export default function Sectors() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {content.items.map((sector, index) => (
-            <div
+            <Link
               key={index}
-              className="bg-white p-10 rounded-3xl shadow-lg shadow-brand-dark/5 border border-gray-100 hover:border-brand-blue/30 transition-all duration-300 hover:-translate-y-1 group"
+              href={sectorLinks[index] || "/contatti"}
+              className="bg-white p-10 rounded-3xl shadow-lg shadow-brand-dark/5 border border-gray-100 hover:border-brand-blue/30 transition-all duration-300 hover:-translate-y-2 group cursor-pointer block active:scale-[0.98] active:bg-gray-50/50"
             >
-              <Link href={sectorLinks[index] || "/contatti"} className="block h-full cursor-pointer">
-                
-                <div className="flex justify-between items-start mb-6 pb-4 border-b border-gray-100 group-hover:border-brand-blue/20 transition-colors">
-                  <h3 className="text-2xl font-bold text-brand-dark">
-                    {sector.title}
-                  </h3>
-                  <span className="text-brand-blue opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-xl">
-                    &rarr;
-                  </span>
-                </div>
+            
+              <div className="flex justify-between items-start mb-6 pb-4 border-b border-gray-100 group-hover:border-brand-blue/20 transition-colors">
+                <h3 className="text-2xl font-bold text-brand-dark">
+                  {sector.title}
+                </h3>
+                <span className="text-brand-blue transition-transform duration-300 text-xl group-hover:translate-x-2">
+                  &rarr;
+                </span>
+              </div>
 
-                <ul className="space-y-4">
-                  {sector.features.map((feature, i) => (
-                    <li key={i} className="flex items-start text-brand-gray">
-                      <span className="text-brand-blue mr-3 mt-1">&#10003;</span>
-                      <span className="font-light">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                
-              </Link>
-            </div>
+              <ul className="space-y-4">
+                {sector.features.map((feature, i) => (
+                  <li key={i} className="flex items-start text-brand-gray">
+                    <span className="text-brand-blue mr-3 mt-1">&#10003;</span>
+                    <span className="font-light">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-8 pt-4 border-t border-gray-100 group-hover:border-brand-blue/10 text-center hidden md:block">
+                <span className="text-sm font-medium text-brand-blue opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  {language === 'it' ? 'Scopri di più' : 'Learn more'}
+                </span>
+              </div>
+
+            </Link>
           ))}
         </div>
 

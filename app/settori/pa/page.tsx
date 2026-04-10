@@ -6,12 +6,13 @@ import { useLanguage } from '@/context/LanguageContext';
 import { PA_PAGE_DATA } from '@/constants/sectors';
 
 export default function PubblicaAmministrazionePage() {
-  const { language, t } = useLanguage();
+  const { language } = useLanguage();
   const content = PA_PAGE_DATA[language];
 
   return (
     <div className="bg-white min-h-screen text-brand-dark selection:bg-brand-blue selection:text-white">
       
+      {/* --- BANNER CONDIVISO --- */}
       <PageBanner 
         currentPage={content.currentPage}
         tag={content.header.tag}
@@ -52,29 +53,21 @@ export default function PubblicaAmministrazionePage() {
 
           {/* --- CONTENUTO --- */}
           <div className="lg:col-span-8 space-y-24">
+            
             <section>
               <h2 className="text-3xl md:text-5xl font-light tracking-tight text-brand-dark mb-8 leading-tight">
-                {t("L'innovazione senza", "Innovation without")} <span className="font-semibold text-brand-blue">{t("compromessi", "compromise")}</span>.
+                {content.intro.titleLight} <span className="font-semibold text-brand-blue">{content.intro.titleBold}</span>{content.intro.titleSuffix}
               </h2>
               <div className="space-y-6 text-lg text-brand-gray font-light leading-relaxed">
-                <p>
-                  {t(
-                    "Le Pubbliche Amministrazioni gestiscono quotidianamente enormi moli di dati sensibili dei cittadini. Molte infrastrutture IT pubbliche sono ancora ancorate a sistemi legacy obsoleti.",
-                    "Public Administrations manage massive amounts of sensitive citizen data daily. Many public IT infrastructures are still tied to obsolete legacy systems."
-                  )}
-                </p>
-                <p>
-                  {t(
-                    "Il nostro obiettivo è portare la PA nel futuro attraverso un approccio Modern Workplace strutturato, garantendo l'operatività ininterrotta dei servizi al cittadino.",
-                    "Our goal is to bring the Public Sector into the future through a structured Modern Workplace approach, ensuring uninterrupted operation of citizen services."
-                  )}
-                </p>
+                {content.intro.paragraphs.map((p, i) => (
+                  <p key={i}>{p}</p>
+                ))}
               </div>
             </section>
 
             <section>
               <h3 className="text-[10px] font-black uppercase tracking-[0.5em] text-brand-blue mb-12">
-                {t("I Nostri Interventi per la PA", "Our Interventions for Gov")}
+                {content.approccio.tag}
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {content.interventions.map((item, idx) => (
@@ -103,6 +96,7 @@ export default function PubblicaAmministrazionePage() {
                   </Link>
                </div>
             </section>
+
           </div>
         </div>
       </main>

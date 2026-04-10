@@ -4,18 +4,18 @@ import "./globals.css";
 import OverlayNav from "@/components/layout/OverlayNav";
 import ContactFooter from "@/components/layout/ContactFooter";
 import { LanguageProvider } from '@/context/LanguageContext';
+import ChatWidget from "@/components/layout/ChatWidget";
 
-// Ottimizzazione font: carichiamo solo quello che serve
 const montserrat = Montserrat({ 
   subsets: ["latin"],
   weight: ['300', '400', '600', '700', '900'], // Light, Regular, SemiBold, Bold, Black
-  display: 'swap', // Migliora il tempo di caricamento del testo (Lighthouse performance)
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
   title: {
     default: "HT Solution | Infrastrutture IT e Software su Misura",
-    template: "%s | HT Solution" // Permette alle pagine interne di aggiungere il loro titolo (es: "Navale | HT Solution")
+    template: "%s | HT Solution"
   },
   description: "Boutique tecnologica specializzata in cybersecurity, networking, infrastrutture critiche e sviluppo software AI-driven.",
   metadataBase: new URL('https://www.htsolution.it'),
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     icon: "/icon.svg",
     apple: "/icon.svg",
   },
-  // Open Graph per anteprime social (LinkedIn/WA)
+
   openGraph: {
     title: "HT Solution | Boutique Tecnologica",
     description: "Infrastrutture IT, Software e Cybersecurity.",
@@ -40,6 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <OverlayNav />
           <main className="min-h-screen flex flex-col">
             {children}
+            <ChatWidget />
           </main>
           <ContactFooter />
         </LanguageProvider>

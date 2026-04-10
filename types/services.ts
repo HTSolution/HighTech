@@ -19,7 +19,6 @@ export interface Service {
   metrics?: ServiceMetric[];
   stack?: string[];
   process?: ServiceProcessStep[];
-  // Aggiungi qui altri campi se necessari
 }
 
 export interface ServicesContent {

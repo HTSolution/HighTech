@@ -14,7 +14,20 @@ export const NAVALE_PAGE_DATA = {
       itot: { label: "Segregazione Reti", value: "IT / OT" },
       uptime: { label: "Monitoraggio Asset", value: "24/7" },
       boxTitle: "Cos'è la Direttiva NIS?",
-      boxText: "È la direttiva UE sulla cybersicurezza che classifica il settore marittimo come 'infrastruttura critica'. Il mancato adeguamento comporta sanzioni fino a 10 Milioni di Euro."
+      boxText: "È la direttiva UE sulla cybersicurezza che classifica il settore marittimo come 'infrastruttura critica'. Il mancato adeguamento comporta sanzioni fino a 10 Milioni di Euro.",
+      boxLink: "Approfondisci la Direttiva NIS2"
+    },
+    intro: {
+      titleLight: "Il mare non è più un",
+      titleBold: "porto sicuro",
+      titleSuffix: "per i dati.",
+      paragraphs: [
+        "Fino a pochi anni fa, le reti a bordo delle navi operavano in totale isolamento. Oggi, le motonavi moderne sono 'data center galleggianti', costantemente connessi con la terraferma tramite sistemi satellitari e 5G.",
+        "Questa iper-connettività ha esposto il settore marittimo ad attacchi ransomware devastanti. Per questo motivo, l'Unione Europea ha imposto adeguamenti drastici tramite la Direttiva NIS."
+      ]
+    },
+    approccio: {
+      tag: "L'Approccio HT Solution"
     },
     solutions: [
       {
@@ -59,7 +72,20 @@ export const NAVALE_PAGE_DATA = {
       itot: { label: "Network Segregation", value: "IT / OT" },
       uptime: { label: "Asset Monitoring", value: "24/7" },
       boxTitle: "What is the NIS Directive?",
-      boxText: "It is the EU cybersecurity directive classifying the maritime sector as 'critical infrastructure'. Non-compliance leads to fines up to 10 Million Euros."
+      boxText: "It is the EU cybersecurity directive classifying the maritime sector as 'critical infrastructure'. Non-compliance leads to fines up to 10 Million Euros.",
+      boxLink: "Learn more about NIS2 Directive"
+    },
+    intro: {
+      titleLight: "The sea is no longer a",
+      titleBold: "safe haven",
+      titleSuffix: "for data.",
+      paragraphs: [
+        "Until a few years ago, shipboard networks operated in total isolation. Today, modern vessels are 'floating data centers', constantly connected to the mainland via satellite and 5G systems.",
+        "This hyper-connectivity has exposed the maritime sector to devastating ransomware attacks. For this reason, the European Union has imposed drastic adjustments through the NIS Directive."
+      ]
+    },
+    approccio: {
+      tag: "The HT Solution Approach"
     },
     solutions: [
       {
@@ -91,7 +117,6 @@ export const NAVALE_PAGE_DATA = {
   }
 };
 
-
 export const PA_PAGE_DATA = {
   it: {
     tag: "Transizione Digitale",
@@ -108,23 +133,23 @@ export const PA_PAGE_DATA = {
       trust: { label: "Sicurezza Endpoint", value: "Zero Trust" },
       agid: { label: "Compliance Normativa", value: "AgID / GDPR" }
     },
+    intro: {
+      titleLight: "L'innovazione senza",
+      titleBold: "compromessi",
+      titleSuffix: ".",
+      paragraphs: [
+        "Le Pubbliche Amministrazioni gestiscono quotidianamente enormi moli di dati sensibili dei cittadini. Molte infrastrutture IT pubbliche sono ancora ancorate a sistemi legacy obsoleti.",
+        "Il nostro obiettivo è portare la PA nel futuro attraverso un approccio Modern Workplace strutturato, garantendo l'operatività ininterrotta dei servizi al cittadino."
+      ]
+    },
+    approccio: {
+      tag: "I Nostri Interventi per la PA"
+    },
     interventions: [
-      {
-        title: "Gestione Tenant M365",
-        text: "Configurazione, migrazione e governance completa dell'ecosistema Microsoft 365 per la collaborazione sicura tra uffici."
-      },
-      {
-        title: "Sicurezza Endpoint (Intune)",
-        text: "Gestione centralizzata di PC e mobili dell'ente. Policy stringenti per impedire la fuga di dati sensibili."
-      },
-      {
-        title: "Business Continuity",
-        text: "Progettiamo sistemi di Disaster Recovery per ripristinare i dati istantaneamente in caso di guasti o ransomware."
-      },
-      {
-        title: "Supporto Operativo",
-        text: "Un Help Desk dedicato pronto a risolvere i problemi quotidiani degli operatori pubblici, riducendo i tempi di fermo."
-      }
+      { title: "Gestione Tenant M365", text: "Configurazione, migrazione e governance completa dell'ecosistema Microsoft 365 per la collaborazione sicura tra uffici." },
+      { title: "Sicurezza Endpoint (Intune)", text: "Gestione centralizzata di PC e mobili dell'ente. Policy stringenti per impedire la fuga di dati sensibili." },
+      { title: "Business Continuity", text: "Progettiamo sistemi di Disaster Recovery per ripristinare i dati istantaneamente in caso di guasti o ransomware." },
+      { title: "Supporto Operativo", text: "Un Help Desk dedicato pronto a risolvere i problemi quotidiani degli operatori pubblici, riducendo i tempi di fermo." }
     ],
     cta: {
       title: "Pronto a digitalizzare il tuo Ente?",
@@ -147,23 +172,23 @@ export const PA_PAGE_DATA = {
       trust: { label: "Endpoint Security", value: "Zero Trust" },
       agid: { label: "Regulatory Compliance", value: "AgID / GDPR" }
     },
+    intro: {
+      titleLight: "Innovation without",
+      titleBold: "compromise",
+      titleSuffix: ".",
+      paragraphs: [
+        "Public Administrations manage massive amounts of sensitive citizen data daily. Many public IT infrastructures are still tied to obsolete legacy systems.",
+        "Our goal is to bring the Public Sector into the future through a structured Modern Workplace approach, ensuring uninterrupted operation of citizen services."
+      ]
+    },
+    approccio: {
+      tag: "Our Interventions for Gov"
+    },
     interventions: [
-      {
-        title: "M365 Tenant Management",
-        text: "Full configuration, migration, and governance of the Microsoft 365 ecosystem for secure collaboration between departments."
-      },
-      {
-        title: "Endpoint Security (Intune)",
-        text: "Centralized management of the entity's PCs and mobile devices. Strict policies to prevent sensitive data leaks."
-      },
-      {
-        title: "Business Continuity",
-        text: "We design Disaster Recovery systems to instantly restore data in case of hardware failure or ransomware."
-      },
-      {
-        title: "Operational Support",
-        text: "A dedicated Help Desk ready to solve daily problems for public operators, reducing downtime."
-      }
+      { title: "M365 Tenant Management", text: "Full configuration, migration, and governance of the Microsoft 365 ecosystem for secure collaboration between departments." },
+      { title: "Endpoint Security (Intune)", text: "Centralized management of the entity's PCs and mobile devices. Strict policies to prevent sensitive data leaks." },
+      { title: "Business Continuity", text: "We design Disaster Recovery systems to instantly restore data in case of hardware failure or ransomware." },
+      { title: "Operational Support", text: "A dedicated Help Desk ready to solve daily problems for public operators, reducing downtime." }
     ],
     cta: {
       title: "Ready to digitize your Authority?",
@@ -188,6 +213,18 @@ export const PMI_PAGE_DATA = {
       vpn: { label: "Site-to-Site Sicure", value: "VPN" },
       pc: { label: "Gestione Postazioni PC", value: "5 - 80" },
       ha: { label: "Alta Affidabilità", value: "HA" }
+    },
+    intro: {
+      titleLight: "La forza di un",
+      titleBold: "IT centralizzato",
+      titleSuffix: ".",
+      paragraphs: [
+        "Quando un'azienda cresce e apre nuove sedi, la tecnologia può diventare il suo peggior collo di bottiglia. Documenti non sincronizzati e gestionali irraggiungibili rallentano il business.",
+        "Progettiamo l'architettura per far comunicare tutte le tue sedi come se fossero nello stesso edificio, gestendo ogni problema tecnico in tempo reale."
+      ]
+    },
+    approccio: {
+      tag: "L'Architettura Multi-Sede"
     },
     solutions: [
       {
@@ -227,6 +264,18 @@ export const PMI_PAGE_DATA = {
       vpn: { label: "Secure Site-to-Site", value: "VPN" },
       pc: { label: "PC Station Management", value: "5 - 80" },
       ha: { label: "High Availability", value: "HA" }
+    },
+    intro: {
+      titleLight: "The strength of a",
+      titleBold: "centralized IT",
+      titleSuffix: ".",
+      paragraphs: [
+        "When a company grows and opens new locations, technology can become its worst bottleneck. Out-of-sync documents and unreachable ERPs slow down the business.",
+        "We design the architecture to make all your locations communicate as if they were in the same building, handling every technical issue in real-time."
+      ]
+    },
+    approccio: {
+      tag: "The Multi-Site Architecture"
     },
     solutions: [
       {

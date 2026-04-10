@@ -6,7 +6,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { PMI_PAGE_DATA } from '@/constants/sectors';
 
 export default function PMIMultiSedePage() {
-  const { language, t } = useLanguage();
+  const { language } = useLanguage();
   const content = PMI_PAGE_DATA[language];
 
   return (
@@ -54,27 +54,18 @@ export default function PMIMultiSedePage() {
           <div className="lg:col-span-8 space-y-24">
             <section>
               <h2 className="text-3xl md:text-5xl font-light tracking-tight text-brand-dark mb-8 leading-tight">
-                {t("La forza di un", "The strength of a")} <span className="font-semibold text-brand-blue">{t("IT centralizzato", "centralized IT")}</span>.
+                {content.intro.titleLight} <span className="font-semibold text-brand-blue">{content.intro.titleBold}</span>{content.intro.titleSuffix}
               </h2>
               <div className="space-y-6 text-lg text-brand-gray font-light leading-relaxed">
-                <p>
-                  {t(
-                    "Quando un'azienda cresce e apre nuove sedi, la tecnologia può diventare il suo peggior collo di bottiglia. Documenti non sincronizzati e gestionali irraggiungibili rallentano il business.",
-                    "When a company grows and opens new locations, technology can become its worst bottleneck. Out-of-sync documents and unreachable ERPs slow down the business."
-                  )}
-                </p>
-                <p>
-                  {t(
-                    "Progettiamo l'architettura per far comunicare tutte le tue sedi come se fossero nello stesso edificio, gestendo ogni problema tecnico in tempo reale.",
-                    "We design the architecture to make all your locations communicate as if they were in the same building, handling every technical issue in real-time."
-                  )}
-                </p>
+                {content.intro.paragraphs.map((p, i) => (
+                  <p key={i}>{p}</p>
+                ))}
               </div>
             </section>
 
             <section>
               <h3 className="text-[10px] font-black uppercase tracking-[0.5em] text-brand-blue mb-12">
-                {t("L'Architettura Multi-Sede", "The Multi-Site Architecture")}
+                {content.approccio.tag}
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {content.solutions.map((item, idx) => (

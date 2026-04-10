@@ -11,7 +11,6 @@ export default function ServicesGrid() {
   const content = SERVICES_GRID_CONTENT[language];
   const services = SERVICES_DATA[language];
 
-  // Helper per evidenziare "soluzioni visionarie" / "visionary solutions"
   const renderPhilosophy = () => {
     const key = language === 'it' ? 'soluzioni visionarie' : 'visionary solutions';
     const parts = content.philosophy.quote.split(key);

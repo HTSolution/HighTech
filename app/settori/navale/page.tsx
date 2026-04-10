@@ -6,13 +6,12 @@ import { useLanguage } from '@/context/LanguageContext';
 import { NAVALE_PAGE_DATA } from '@/constants/sectors';
 
 export default function NavalePage() {
-  const { language, t } = useLanguage();
+  const { language } = useLanguage();
   const content = NAVALE_PAGE_DATA[language];
 
   return (
     <div className="bg-white min-h-screen text-brand-dark selection:bg-brand-blue selection:text-white">
       
-      {/* --- BANNER CONDIVISO --- */}
       <PageBanner 
         currentPage={content.currentPage}
         tag={content.header.tag}
@@ -51,10 +50,22 @@ export default function NavalePage() {
             </div>
             
             <div className="bg-blue-50/50 p-10 rounded-[2.5rem] border border-blue-100">
-                <h4 className="font-bold text-brand-dark mb-3">{content.sidebar.boxTitle}</h4>
-                <p className="text-sm text-brand-gray leading-relaxed font-light">
-                  {content.sidebar.boxText}
-                </p>
+              <h4 className="font-bold text-brand-dark mb-3">{content.sidebar.boxTitle}</h4>
+              <p className="text-sm text-brand-gray leading-relaxed font-light mb-6">
+                {content.sidebar.boxText}
+              </p>
+              
+              <a 
+                href="https://digital-strategy.ec.europa.eu/it/policies/nis2-directive" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-brand-blue hover:text-brand-dark transition-colors group"
+              >
+                {content.sidebar.boxLink}
+                <svg className="w-3 h-3 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
             </div>
           </aside>
 
@@ -62,27 +73,18 @@ export default function NavalePage() {
             
             <section>
               <h2 className="text-3xl md:text-5xl font-light tracking-tight text-brand-dark mb-8 leading-tight">
-                {t("Il mare non è più un", "The sea is no longer a")} <span className="font-semibold">{t("porto sicuro", "safe haven")}</span> {t("per i dati.", "for data.")}
+                {content.intro.titleLight} <span className="font-semibold">{content.intro.titleBold}</span> {content.intro.titleSuffix}
               </h2>
               <div className="space-y-6 text-lg text-brand-gray font-light leading-relaxed">
-                <p>
-                  {t(
-                    "Fino a pochi anni fa, le reti a bordo delle navi operavano in totale isolamento. Oggi, le motonavi moderne sono 'data center galleggianti', costantemente connessi con la terraferma tramite sistemi satellitari e 5G.",
-                    "Until a few years ago, shipboard networks operated in total isolation. Today, modern vessels are 'floating data centers', constantly connected to the mainland via satellite and 5G systems."
-                  )}
-                </p>
-                <p>
-                  {t(
-                    "Questa iper-connettività ha esposto il settore marittimo ad attacchi ransomware devastanti. Per questo motivo, l'Unione Europea ha imposto adeguamenti drastici tramite la Direttiva NIS.",
-                    "This hyper-connectivity has exposed the maritime sector to devastating ransomware attacks. For this reason, the European Union has imposed drastic adjustments through the NIS Directive."
-                  )}
-                </p>
+                {content.intro.paragraphs.map((para, index) => (
+                  <p key={index}>{para}</p>
+                ))}
               </div>
             </section>
 
             <section>
               <h3 className="text-[10px] font-black uppercase tracking-[0.5em] text-brand-blue mb-12">
-                {t("L'Approccio HT Solution", "The HT Solution Approach")}
+                {content.approccio.tag}
               </h3>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -100,10 +102,8 @@ export default function NavalePage() {
               </div>
             </section>
 
-            {/* --- CALL TO ACTION --- */}
             <section className="mt-12 p-12 md:p-16 bg-brand-dark rounded-[3.5rem] text-white text-center relative overflow-hidden">
                <div className="absolute top-[-50%] left-[-10%] w-96 h-96 bg-brand-blue/20 blur-[120px] rounded-full" />
-               
                <div className="relative z-10 max-w-2xl mx-auto">
                   <h3 className="text-3xl md:text-5xl font-light mb-6 tracking-tighter">
                     {content.cta.title}

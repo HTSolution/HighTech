@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface LegalSection {
   title: string;
@@ -6,13 +9,35 @@ interface LegalSection {
 }
 
 interface LegalLayoutProps {
-  title: string;
-  lastUpdated: string;
-  introduction: string;
-  sections: LegalSection[];
+  data: {
+    it: {
+      title: string;
+      lastUpdated: string;
+      introduction: string;
+      sections: LegalSection[];
+    };
+    en: {
+      title: string;
+      lastUpdated: string;
+      introduction: string;
+      sections: LegalSection[];
+    };
+  };
 }
 
-export default function LegalLayout({ title, lastUpdated, introduction, sections }: LegalLayoutProps) {
+export default function LegalLayout({ data }: LegalLayoutProps) {
+  const { language, t } = useLanguage();
+  
+  // Seleziona i dati corretti in base alla lingua
+  const currentContent = data[language];
+
+  // Fallback di sicurezza per evitare il crash se data è malformato
+  if (!currentContent || !currentContent.sections) {
+    return null;
+  }
+
+  const { title, lastUpdated, introduction, sections } = currentContent;
+
   return (
     <div className="bg-white min-h-screen text-brand-dark pt-40 pb-24 px-6">
       <div className="max-w-4xl mx-auto">
@@ -24,7 +49,9 @@ export default function LegalLayout({ title, lastUpdated, introduction, sections
 
         <header className="mb-16 border-b border-gray-100 pb-12">
           <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-6">{title}</h1>
-          <p className="text-sm text-brand-blue font-mono uppercase tracking-widest mb-8">Ultimo aggiornamento: {lastUpdated}</p>
+          <p className="text-sm text-brand-blue font-mono uppercase tracking-widest mb-8">
+            {t("Ultimo aggiornamento", "Last updated")}: {lastUpdated}
+          </p>
           <p className="text-xl text-brand-gray font-light leading-relaxed italic">{introduction}</p>
         </header>
 
@@ -41,7 +68,7 @@ export default function LegalLayout({ title, lastUpdated, introduction, sections
 
         <footer className="mt-24 pt-12 border-t border-gray-100">
           <Link href="/contatti" className="text-brand-blue font-bold uppercase text-[10px] tracking-widest hover:text-brand-dark transition-colors">
-            Domande sulla gestione dati? Contattaci &rarr;
+            {t("Domande sulla gestione dati? Contattaci", "Questions about data management? Contact us")} &rarr;
           </Link>
         </footer>
       </div>

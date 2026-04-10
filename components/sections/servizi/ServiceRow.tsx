@@ -2,10 +2,10 @@
 
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
-import { Service } from '@/types/services'; // Importa il tipo
+import { Service } from '@/types/services'; 
 
 interface ServiceRowProps {
-  service: Service; // Niente più any!
+  service: Service;
   index: number;
 }
 

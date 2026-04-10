@@ -5,8 +5,6 @@ import { ABOUT_PAGE_DATA } from '@/constants/chi-siamo/about';
 
 export default function History() {
   const { language } = useLanguage();
-  
-  // Prendiamo i dati della lingua attuale in modo diretto
   const { history } = ABOUT_PAGE_DATA[language];
 
   return (
