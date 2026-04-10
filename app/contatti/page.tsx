@@ -135,7 +135,7 @@ export default function ContattiPage() {
 
                     {/* Chiamata Kira Voice */}
                     <a 
-                      href="tel:0818681442"
+                      href="tel:+390818681442,19"
                       className="group flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300"
                     >
                       <div className="w-10 h-10 bg-emerald-500/20 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-emerald-500/40 transition-colors">
