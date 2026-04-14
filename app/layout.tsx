@@ -5,7 +5,7 @@ import OverlayNav from "@/components/layout/OverlayNav";
 import ContactFooter from "@/components/layout/ContactFooter";
 import { LanguageProvider } from '@/context/LanguageContext';
 import ChatWidget from "@/components/layout/ChatWidget";
-
+import KiraVoiceFAB from "@/components/layout/KiraVoiceFAB";
 const montserrat = Montserrat({ 
   subsets: ["latin"],
   weight: ['300', '400', '600', '700', '900'], // Light, Regular, SemiBold, Bold, Black
@@ -40,7 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <OverlayNav />
           <main className="min-h-screen flex flex-col">
             {children}
-            <ChatWidget />
+            <KiraVoiceFAB />
           </main>
           <ContactFooter />
         </LanguageProvider>
