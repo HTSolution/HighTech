@@ -56,9 +56,14 @@ export default function ContattiPage() {
                   <div className="w-12 h-12 bg-brand-light rounded-full flex items-center justify-center text-brand-blue shrink-0">
                     <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
                   </div>
-                  <div>
+                  <div className="flex flex-col">
                     <p className="text-[10px] uppercase tracking-widest text-brand-gray font-bold mb-1">{content.info.email.label}</p>
-                    <a href={`mailto:${content.info.email.value}`} className="text-2xl font-light hover:text-brand-blue transition-colors">{content.info.email.value}</a>
+                    <a href={`mailto:${content.info.email.value}`} className="text-2xl font-light hover:text-brand-blue transition-colors">
+                      {content.info.email.value}
+                    </a>
+                    <a href={`mailto:${content.info.email.value2}`} className="text-2xl font-light hover:text-brand-blue transition-colors">
+                      {content.info.email.value2}
+                    </a>
                   </div>
                 </div>
 
@@ -84,11 +89,11 @@ export default function ContattiPage() {
               </a>
             </motion.div>
 
-            {/* Colonna Chat (Componente Separato) */}
+            {/* Colonna Chat */}
             <motion.div 
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="lg:col-span-7 bg-brand-dark rounded-[3rem] h-[650px] text-white overflow-hidden border border-white/5 shadow-2xl"
+              className="lg:col-span-7 bg-brand-dark rounded-[2rem] h-[650px] text-white overflow-hidden border border-white/5 shadow-2xl"
             >
               <KiraChatBody />
             </motion.div>

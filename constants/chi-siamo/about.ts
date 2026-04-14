@@ -80,12 +80,17 @@ export const ABOUT_PAGE_DATA = {
         { title: "Proattivit\u00e0 Totale", desc: "Non aspettiamo che qualcosa si rompa. Monitoriamo, preveniamo e agiamo in anticipo." }
       ]
     },
-    stats: [
-      { label: "Tecnici Infrastruttura", value: "3" },
-      { label: "Sviluppatori Senior", value: "2" },
-      { label: "UI/UX Designer", value: "1" },
-      { label: "Anni di Esperienza", value: "20+" }
-    ],
+    stats: {
+      technical: [
+        { label: "Tecnici Infrastruttura", value: "4" },
+        { label: "Sviluppatori Senior", value: "2" },
+        { label: "UI/UX Designer", value: "1" }
+      ],
+      relations: [
+        { label: "Team Operativo & Customer Care", value: "2" },
+        { label: "Anni di Esperienza", value: "20+" }
+      ]
+    },
     history: {
       tag: "Evoluzione",
       title: { light: "La nostra", bold: "Storia" },
@@ -181,12 +186,17 @@ export const ABOUT_PAGE_DATA = {
         { title: "Total Proactivity", desc: "We don\u2019t wait for something to break. We monitor, prevent and act ahead of time." }
       ]
     },
-    stats: [
-      { label: "Infrastructure Engineers", value: "3" },
-      { label: "Senior Developers", value: "2" },
-      { label: "UI/UX Designer", value: "1" },
-      { label: "Years of Experience", value: "20+" }
-    ],
+    stats: {
+      technical: [
+        { label: "Infrastructure Engineers", value: "4" },
+        { label: "Senior Developers", value: "2" },
+        { label: "UI/UX Designer", value: "1" }
+      ],
+      relations: [
+        { label: "Operations & Customer Care", value: "2" },
+        { label: "Years of Experience", value: "20+" }
+      ]
+    },
     history: {
       tag: "Evolution",
       title: { light: "Our", bold: "History" },

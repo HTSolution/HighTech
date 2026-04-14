@@ -32,19 +32,70 @@ export default function Identity() {
             </div>
           </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 border-t border-gray-200 pt-16">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center lg:text-left group cursor-default">
-                <p className="text-4xl md:text-5xl font-bold text-brand-dark mb-2 group-hover:text-brand-blue transition-colors duration-500">
-                  {stat.value}
-                </p>
-                <p className="text-[10px] uppercase tracking-widest text-brand-gray font-semibold">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
+          {/* --- SEZIONE STATS PARTICOLARE --- */}
+<div className="border-t border-gray-200 pt-24">
+  <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+    
+    {/* Colonna Sinistra: Technical Core (Occupia 7/12) */}
+    <div className="lg:col-span-7 space-y-12">
+      <div className="space-y-2">
+        <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-brand-blue">
+          Technical Core
+        </span>
+        <h3 className="text-sm font-light text-brand-gray uppercase tracking-widest">
+          La nostra forza verticale
+        </h3>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+        {stats.technical.map((stat, index) => (
+          <div key={index} className="relative group">
+            {/* Numero gigante in background opaco opzionale */}
+            <span className="absolute -top-6 -left-2 text-7xl font-bold text-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10">
+              {stat.value}
+            </span>
+            <p className="text-6xl font-bold text-brand-dark group-hover:text-brand-blue transition-colors duration-500">
+              {stat.value}
+            </p>
+            <p className="text-[10px] uppercase tracking-widest text-brand-gray font-bold mt-2 leading-tight">
+              {stat.label}
+            </p>
           </div>
+        ))}
+      </div>
+    </div>
+
+    {/* Colonna Destra: Relations & Experience (Occupia 5/12) */}
+    <div className="lg:col-span-5 bg-brand-dark p-10 md:p-12 rounded-[2rem] text-white space-y-12 relative overflow-hidden">
+      {/* Elemento grafico decorativo */}
+      <div className="absolute top-0 right-0 w-32 h-32 bg-brand-blue/10 rounded-full -mr-16 -mt-16 blur-3xl"></div>
+      
+      <div className="space-y-2 relative z-10">
+        <span className="text-brand-blue font-bold uppercase text-[10px] tracking-[0.4em]">
+          Relations & Heritage
+        </span>
+        <h3 className="text-sm font-light text-gray-400 uppercase tracking-widest">
+          Il valore del tempo e delle persone
+        </h3>
+      </div>
+
+      <div className="grid grid-cols-1 gap-10 relative z-10">
+        {stats.relations.map((stat, index) => (
+          <div key={index} className="flex items-end gap-4 group">
+            <p className="text-6xl font-bold text-white group-hover:text-brand-blue transition-colors duration-500 leading-none">
+              {stat.value}
+            </p>
+            <p className="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-1 leading-tight">
+              {stat.label}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+  </div>
+</div>
+
         </div>
       </section>
 
