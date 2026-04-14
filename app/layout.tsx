@@ -4,7 +4,6 @@ import "./globals.css";
 import OverlayNav from "@/components/layout/OverlayNav";
 import ContactFooter from "@/components/layout/ContactFooter";
 import { LanguageProvider } from '@/context/LanguageContext';
-import ChatWidget from "@/components/layout/ChatWidget";
 import KiraVoiceFAB from "@/components/layout/KiraVoiceFAB";
 const montserrat = Montserrat({ 
   subsets: ["latin"],
