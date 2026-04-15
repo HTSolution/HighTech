@@ -1,17 +1,90 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
 import { CONTACT_DATA } from '@/constants/contact';
-import KiraChatBody from '@/components/layout/KiraChatBody';
+import { 
+  Phone, 
+  Mail, 
+  MapPin, 
+  MessageCircle, 
+  Bot, 
+  ChevronRight,
+  X
+} from 'lucide-react';
 
 export default function ContattiPage() {
   const { language } = useLanguage();
   const content = CONTACT_DATA[language];
+  const [showCallAlert, setShowCallAlert] = useState(false);
+
+  const openGlobalAIChat = () => {
+    const fabButton = document.querySelector('#smart-fab-button') as HTMLButtonElement;
+    if (fabButton) fabButton.click();
+  };
+
+  const handlePhoneClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setShowCallAlert(true);
+  };
+
+  const confirmCall = () => {
+    setShowCallAlert(false);
+    window.location.href = `tel:${content.info.phone.value.replace(/\s/g, '')},19`;
+  };
 
   return (
-    <div className="bg-white min-h-screen text-brand-dark selection:bg-brand-blue selection:text-white flex flex-col">
+    <div className="bg-white min-h-screen text-brand-dark selection:bg-brand-blue selection:text-white flex flex-col relative">
+      
+      {/* Popup Avviso Chiamata Dinamico */}
+      <AnimatePresence>
+        {showCallAlert && (
+          <div className="fixed inset-0 z-[10000] flex items-center justify-center px-6 bg-brand-dark/80 backdrop-blur-sm">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="bg-white rounded-[2.5rem] p-8 w-full max-w-sm shadow-2xl relative"
+            >
+              <button 
+                onClick={() => setShowCallAlert(false)}
+                className="absolute top-6 right-6 text-brand-gray/40 hover:text-brand-dark transition-colors"
+              >
+                <X size={20} />
+              </button>
+
+              <div className="w-16 h-16 bg-brand-light rounded-2xl flex items-center justify-center text-brand-blue mb-6">
+                <Phone size={28} />
+              </div>
+
+              <h3 className="text-xl font-bold text-brand-dark mb-3 tracking-tight">
+                {content.callAlert.title}
+              </h3>
+              <p className="text-brand-gray text-sm leading-relaxed mb-8">
+                {content.callAlert.description}
+              </p>
+
+              <div className="flex flex-col gap-3">
+                <button 
+                  onClick={confirmCall}
+                  className="w-full bg-brand-blue text-white py-4 rounded-xl font-bold uppercase text-[10px] tracking-widest hover:bg-brand-dark transition-all"
+                >
+                  {content.callAlert.confirm}
+                </button>
+                <button 
+                  onClick={() => setShowCallAlert(false)}
+                  className="w-full py-4 text-brand-gray/60 font-bold uppercase text-[10px] tracking-widest hover:text-brand-dark transition-colors"
+                >
+                  {content.callAlert.cancel}
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
       <main className="grow pt-40 pb-24 px-6 md:px-10">
         <div className="max-w-7xl mx-auto">
           
@@ -23,7 +96,6 @@ export default function ContattiPage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
             
-            {/* Recapiti */}
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -40,37 +112,30 @@ export default function ContattiPage() {
               </div>
 
               <div className="space-y-8">
-                {/* Telefono */}
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-brand-light rounded-full flex items-center justify-center text-brand-blue shrink-0">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+                    <Phone size={20} strokeWidth={2} />
                   </div>
                   <div>
                     <p className="text-[10px] uppercase tracking-widest text-brand-gray font-bold mb-1">{content.info.phone.label}</p>
-                    <a href={`tel:${content.info.phone.value.replace(/\s+/g, '')}`} className="text-2xl font-light hover:text-brand-blue transition-colors">{content.info.phone.value}</a>
+                    <a href="#" onClick={handlePhoneClick} className="text-2xl font-light hover:text-brand-blue transition-colors">{content.info.phone.value}</a>
                   </div>
                 </div>
 
-                {/* Email */}
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-brand-light rounded-full flex items-center justify-center text-brand-blue shrink-0">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+                    <Mail size={20} strokeWidth={2} />
                   </div>
                   <div className="flex flex-col">
                     <p className="text-[10px] uppercase tracking-widest text-brand-gray font-bold mb-1">{content.info.email.label}</p>
-                    <a href={`mailto:${content.info.email.value}`} className="text-2xl font-light hover:text-brand-blue transition-colors">
-                      {content.info.email.value}
-                    </a>
-                    <a href={`mailto:${content.info.email.value2}`} className="text-2xl font-light hover:text-brand-blue transition-colors">
-                      {content.info.email.value2}
-                    </a>
+                    <a href={`mailto:${content.info.email.value}`} className="text-2xl font-light hover:text-brand-blue transition-colors">{content.info.email.value}</a>
+                    <a href={`mailto:${content.info.email.value2}`} className="text-2xl font-light hover:text-brand-blue transition-colors">{content.info.email.value2}</a>
                   </div>
                 </div>
 
-                {/* Sede */}
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-brand-light rounded-full flex items-center justify-center text-brand-blue shrink-0">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <MapPin size={20} strokeWidth={2} />
                   </div>
                   <div>
                     <p className="text-[10px] uppercase tracking-widest text-brand-gray font-bold mb-1">{content.info.address.label}</p>
@@ -78,24 +143,85 @@ export default function ContattiPage() {
                   </div>
                 </div>
               </div>
-
-              <a 
-                href="https://wa.me/390818681442" 
-                target="_blank" 
-                rel="noreferrer"
-                className="inline-flex items-center justify-center px-10 py-5 bg-brand-blue text-white rounded-full font-bold uppercase text-[10px] tracking-[0.2em] hover:bg-brand-dark transition-all shadow-xl shadow-brand-blue/20"
-              >
-                {content.cta.button}
-              </a>
             </motion.div>
 
-            {/* Colonna Chat */}
             <motion.div 
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="lg:col-span-7 bg-brand-dark rounded-[2rem] h-[650px] text-white overflow-hidden border border-white/5 shadow-2xl"
+              className="lg:col-span-7 bg-brand-dark rounded-[2.5rem] p-8 md:p-12 flex flex-col justify-center shadow-2xl border border-white/5 h-[650px]"
             >
-              <KiraChatBody />
+              <div className="mb-10">
+                <h3 className="text-white text-3xl font-bold tracking-tighter mb-2">
+                  {content.cta.title}
+                </h3>
+                <p className="text-white/40 text-sm font-light leading-relaxed max-w-md">
+                  {content.cta.description}
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                {[
+                  { 
+                    title: "WhatsApp", 
+                    desc: "Instant Messaging", 
+                    href: "https://wa.me/390818681442", 
+                    icon: MessageCircle,
+                    hoverBg: "hover:bg-green-500",
+                    accentColor: "text-green-500" 
+                  },
+                  { 
+                    title: "Kira AI", 
+                    desc: "Smart Assistant", 
+                    onClick: openGlobalAIChat, 
+                    icon: Bot,
+                    hoverBg: "hover:bg-brand-blue",
+                    accentColor: "text-brand-blue" 
+                  },
+                  { 
+                    title: "Phone Call", 
+                    desc: "Direct Line", 
+                    onClick: handlePhoneClick, 
+                    icon: Phone,
+                    hoverBg: "hover:bg-white",
+                    accentColor: "text-white",
+                    isDark: true 
+                  }
+                ].map((item, idx) => {
+                  const Tag = item.href ? 'a' : 'button';
+                  const Icon = item.icon;
+                  return (
+                    <Tag
+                      key={idx}
+                      href={item.href}
+                      onClick={item.onClick}
+                      className={`group w-full flex items-center justify-between p-5 bg-white/5 border border-white/10 rounded-2xl transition-all duration-500 ${item.hoverBg} hover:border-transparent hover:-translate-y-1`}
+                    >
+                      <div className="flex items-center gap-5 text-left pointer-events-none">
+                        <div className={`w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center transition-all duration-500 group-hover:bg-black/10 shrink-0 ${item.accentColor} group-hover:text-white ${item.isDark ? 'group-hover:text-brand-dark' : ''}`}>
+                          <Icon size={24} strokeWidth={1.5} />
+                        </div>
+                        <div>
+                          <h4 className={`font-bold text-white tracking-tight leading-tight transition-colors duration-500 ${item.isDark ? 'group-hover:text-brand-dark' : ''}`}>
+                            {item.title}
+                          </h4>
+                          <p className={`text-[10px] uppercase tracking-[0.2em] text-white/30 font-bold transition-colors duration-500 ${item.isDark ? 'group-hover:text-brand-dark/40' : 'group-hover:text-white/60'}`}>
+                            {item.desc}
+                          </p>
+                        </div>
+                      </div>
+                      <div className={`mr-2 opacity-20 group-hover:opacity-100 transition-all transform translate-x-2 group-hover:translate-x-0 ${item.isDark ? 'text-brand-dark' : 'text-white'}`}>
+                         <ChevronRight size={20} strokeWidth={2.5} />
+                      </div>
+                    </Tag>
+                  );
+                })}
+              </div>
+
+              <div className="mt-12 pt-8 border-t border-white/5">
+                <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/20">
+                  {content.availability}
+                </p>
+              </div>
             </motion.div>
 
           </div>

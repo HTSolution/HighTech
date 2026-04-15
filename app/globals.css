@@ -25,3 +25,16 @@ body::-webkit-scrollbar {
 html {
   scroll-behavior: auto !important;
 }
+
+altcha-widget {
+  --altcha-bg-color: transparent !important;
+  --altcha-border-color: rgba(255, 255, 255, 0.1) !important;
+  --altcha-label-color: #ffffff !important;
+  --altcha-color-base: #ffffff !important;
+}
+
+/* Rimuove il bordo standard se preferisci quello del tuo contenitore */
+altcha-widget::part(container) {
+  border-radius: 1rem;
+  padding: 0.75rem;
+}

@@ -4,7 +4,10 @@ import "./globals.css";
 import OverlayNav from "@/components/layout/OverlayNav";
 import ContactFooter from "@/components/layout/ContactFooter";
 import { LanguageProvider } from '@/context/LanguageContext';
-import KiraVoiceFAB from "@/components/layout/KiraVoiceFAB";
+import { ChatProvider } from '@/context/ChatContext';
+import SmartFAB from "@/components/layout/SmartFAB";
+import CookieBanner from '@/components/layout/CookieBanner';
+
 const montserrat = Montserrat({ 
   subsets: ["latin"],
   weight: ['300', '400', '600', '700', '900'], // Light, Regular, SemiBold, Bold, Black
@@ -36,12 +39,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="it" className="scroll-smooth">
       <body className={`${montserrat.className} antialiased selection:bg-brand-blue selection:text-white`}>
         <LanguageProvider>
+          <ChatProvider>
+
           <OverlayNav />
           <main className="min-h-screen flex flex-col">
             {children}
-            <KiraVoiceFAB />
           </main>
+          <SmartFAB />
+          <CookieBanner />
           <ContactFooter />
+          </ChatProvider>
         </LanguageProvider>
       </body>
     </html>
